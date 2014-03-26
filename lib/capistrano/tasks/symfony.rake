@@ -30,7 +30,7 @@ namespace :deploy do
     on roles :app do
       within release_path do
         # TODO: does this need to be configurable?
-        execute :php, "./vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php"
+        execute :php, "./vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php", fetch(:app_path)
       end
     end
   end
