@@ -76,6 +76,8 @@ set :symfony_console_flags, "--no-debug"
 
 # Assets install
 set :assets_install_path,   fetch(:web_path)
+
+fetch(:default_env).merge!(symfony_env: fetch(:symfony_env))
 ```
 
 ### Flow
