@@ -31,7 +31,7 @@ capistrano-symfony exposes the following settings (displayed with defaults):
 
 ```ruby
 # Symfony environment
-set :symfony_env_prod,  "prod"
+set :symfony_env,  "prod"
 
 # Symfony application path
 set :app_path,              "app"
@@ -76,6 +76,8 @@ set :symfony_console_flags, "--no-debug"
 
 # Assets install
 set :assets_install_path,   fetch(:web_path)
+
+fetch(:default_env).merge!(symfony_env: fetch(:symfony_env))
 ```
 
 ### Flow
