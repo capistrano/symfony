@@ -31,7 +31,7 @@ capistrano-symfony exposes the following settings (displayed with defaults):
 
 ```ruby
 # Symfony environment
-set :symfony_env_prod,  "prod"
+set :symfony_env,  "prod"
 
 # Symfony application path
 set :app_path,              "app"
