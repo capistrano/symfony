@@ -6,7 +6,7 @@ end
 namespace :deploy do
   desc "Create the cache directory"
   task :create_cache_dir do
-    on roles :app do
+    on release_roles :all do
       within release_path do
         if test "[ -d #{symfony_cache_path} ]"
           execute :rm, "-rf", symfony_cache_path
@@ -19,7 +19,7 @@ namespace :deploy do
   desc "Clear non production controllers"
   task :clear_controllers do
     next unless any? :controllers_to_clear
-    on roles :app do
+    on release_roles :all do
       within symfony_web_path do
         execute :rm, "-f", *fetch(:controllers_to_clear)
       end
@@ -27,7 +27,7 @@ namespace :deploy do
   end
 
   task :build_bootstrap do
-    on roles :app do
+    on release_roles :all do
       within release_path do
         # TODO: does this need to be configurable?
         execute :php, "./vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php", fetch(:app_path)
