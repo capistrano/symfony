@@ -11,6 +11,8 @@ namespace :symfony do
         execute :php, fetch(:symfony_console_path), command, *command_args, fetch(:symfony_console_flags)
       end
     end
+
+    Rake::Task[t.name].reenable
   end
 
   namespace :cache do
