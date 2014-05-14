@@ -69,49 +69,69 @@ set :permission_method,     false
 # Execute set permissions
 set :use_set_permissions,   false
 
-set :composer_install_flags, "--no-dev --no-scripts --verbose --prefer-dist --optimize-autoloader --no-progress"
-
+# Symfony console path
 set :symfony_console_path, fetch(:app_path) + "/console"
+
+# Symfony console flags
 set :symfony_console_flags, "--no-debug"
 
-# Assets install
+# Assets install path
 set :assets_install_path,   fetch(:web_path)
+
+# Assets install flags
+set :assets_install_flags,  '--symlink'
+
+# Assetic dump flags
+set :assetic_dump_flags,  ''
 
 fetch(:default_env).merge!(symfony_env: fetch(:symfony_env))
 ```
 
 ### Flow
 
-capistrano-symfony hooks into the [flow][1] offered by capistrano. It adds
-to that flow like so
+capistrano-symfony hooks into the [flow][1] offered by capistrano. It adds to that flow like so
+
+* ```symfony:create_cache_dir```
+* ```symfony:set_permissions```
+* ```symfony:cache:warmup```
+* ```symfony:clear_controllers```
 
 ```
 deploy
-  deploy:starting
-    [before]
-      deploy:ensure_stage
-      deploy:set_shared_assets
-    deploy:check
-  deploy:started
-  deploy:updating
-    git:create_release
-    deploy:symlink:shared
-    deploy:create_cache_dir
-    deploy:set_permissions:(acl|chmod|chgrp) # optional
-  deploy:updated
-    deploy:build_bootstrap
-    symfony:cache:warmup
-    [after]
-      deploy:clear_controllers
-      deploy:assets:install
-  deploy:publishing
-    deploy:symlink:release
-    deploy:restart
-  deploy:published
-  deploy:finishing
-    deploy:cleanup
-  deploy:finished
-    deploy:log_revision
+|__ deploy:starting
+|   |__ [before]
+|   |   |__ deploy:ensure_stage
+|   |   |__ deploy:set_shared_assets
+|   |__ deploy:check
+|__ deploy:started
+|__ deploy:updating
+|   |__ git:create_release
+|   |__ deploy:symlink:shared
+|   |__ symfony:create_cache_dir
+|   |__ symfony:set_permissions
+|__ deploy:updated
+|   |__ symfony:cache:warmup
+|   |__ symfony:clear_controllers
+|__ deploy:publishing
+|   |__ deploy:symlink:release
+|   |__ deploy:restart
+|__ deploy:published
+|__ deploy:finishing
+|   |__ deploy:cleanup
+|__ deploy:finished
+    |__ deploy:log_revision
+```
+
+### Integrated common tasks
+
+The folowing common tasks are already integrated:
+* ```symfony:assets:install```
+* ```symfony:assetic:dump```
+
+So you can use them with hooks like this:
+```ruby
+  after 'deploy:updated',   'symfony:assets:install'
+  after 'deploy:updated',   'symfony:assetic:dump'
 ```
 
 ### Using the Symfony console
@@ -125,7 +145,17 @@ project you may want to run migrations during a deploy.
 ```ruby
 namespace :deploy do
   task :migrate do
-    invoke 'symfony:command', 'doctrine:migrations:migrate', '--no-interaction'
+    invoke 'symfony:console', 'doctrine:migrations:migrate', '--no-interaction'
+  end
+end
+```
+
+You can also apply role filter on your commands by passing a fourth parameter.
+
+```ruby
+namespace :deploy do
+  task :migrate do
+    invoke 'symfony:console', 'doctrine:migrations:migrate', '--no-interaction', 'db'
   end
 end
 ```

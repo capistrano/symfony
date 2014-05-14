@@ -37,12 +37,19 @@ set :permission_method,     false
 # Execute set permissions
 set :use_set_permissions,   false
 
-set :composer_install_flags, "--no-dev --no-scripts --verbose --prefer-dist --optimize-autoloader --no-progress"
-
+# Symfony console path
 set :symfony_console_path, fetch(:app_path) + "/console"
+
+# Symfony console flags
 set :symfony_console_flags, "--no-debug"
 
-# Assets install
+# Assets install path
 set :assets_install_path,   fetch(:web_path)
+
+# Assets install flags
+set :assets_install_flags,  '--symlink'
+
+# Assetic dump flags
+set :assetic_dump_flags,  ''
 
 fetch(:default_env).merge!(symfony_env: fetch(:symfony_env))
