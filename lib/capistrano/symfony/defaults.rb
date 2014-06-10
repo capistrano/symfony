@@ -51,5 +51,3 @@ set :assets_install_flags,  '--symlink'
 
 # Assetic dump flags
 set :assetic_dump_flags,  ''
-
-fetch(:default_env).merge!(symfony_env: fetch(:symfony_env))
