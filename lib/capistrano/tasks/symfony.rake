@@ -1,3 +1,5 @@
+load File.expand_path("../set_symfony_env.rake", __FILE__)
+
 namespace :symfony do
   desc "Execute a provided symfony command"
   task :console, :command, :params, :role do |t, args|
