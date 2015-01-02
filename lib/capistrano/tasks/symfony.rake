@@ -64,7 +64,7 @@ namespace :symfony do
     end
   end
 
-  desc "Create the cache directory"
+  desc "Set user/group permissions on configured paths"
   task :set_permissions do
     on release_roles :all do
       if fetch(:use_set_permissions)
