@@ -25,7 +25,7 @@ Gem::Specification.new do |gem|
   have changed.
 
   The Big Brains Company and Thomas Tourlourat (@armetiz) kindly agreed to
-  tranfer the ownership of this gem over to the Capistrano organization. The
+  transfer the ownership of this gem over to the Capistrano organization. The
   previous repository can be found here https://github.com/TheBigBrainsCompany/capistrano-symfony
 eos
 
