@@ -108,10 +108,10 @@ deploy
 |   |__ git:create_release
 |   |__ deploy:symlink:shared
 |   |__ symfony:create_cache_dir
-|   |__ symfony:set_permissions
 |__ deploy:updated
 |   |__ symfony:cache:warmup
 |   |__ symfony:clear_controllers
+|   |__ symfony:set_permissions
 |__ deploy:publishing
 |   |__ deploy:symlink:release
 |   |__ deploy:restart
