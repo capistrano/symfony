@@ -61,6 +61,9 @@ set :linked_dirs,           [fetch(:log_path), fetch(:web_path) + "/uploads"]
 set :file_permissions_paths,         [fetch(:log_path), fetch(:cache_path)]
 
 # Name used by the Web Server (i.e. www-data for Apache)
+set :file_permissions_users, ['www-data']
+
+# Name used by the Web Server (i.e. www-data for Apache)
 set :webserver_user,        "www-data"
 
 # Method used to set permissions (:chmod, :acl, or :chgrp)
