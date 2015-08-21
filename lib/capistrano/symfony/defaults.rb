@@ -17,7 +17,7 @@ set :cache_path,            fetch(:app_path) + "/cache"
 set :app_config_path,       fetch(:app_path) + "/config"
 
 # Controllers to clear
-set :controllers_to_clear, ["app_*.php"]
+set :controllers_to_clear, ["app_*.php", "config.php"]
 
 # Files that need to remain the same between deploys
 set :linked_files,          []
