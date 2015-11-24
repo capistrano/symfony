@@ -20,7 +20,7 @@ set :app_config_path,       fetch(:app_path) + "/config"
 set :controllers_to_clear, ["app_*.php"]
 
 # Files that need to remain the same between deploys
-set :linked_files,          []
+set :linked_files,         [fetch(:app_path) + "/config/parameters.yml"]
 
 # Dirs that need to remain the same between deploys (shared dirs)
 set :linked_dirs,           [fetch(:log_path), fetch(:web_path) + "/uploads"]
