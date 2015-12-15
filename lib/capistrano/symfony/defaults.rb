@@ -51,3 +51,6 @@ set :assets_install_flags,  '--symlink'
 
 # Assetic dump flags
 set :assetic_dump_flags,  ''
+
+# SensioDistribution is version 5 or higher
+set :sensio_distribution_version_5,    false
