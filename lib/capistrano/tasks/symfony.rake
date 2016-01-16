@@ -60,7 +60,7 @@ namespace :symfony do
   desc "Set user/group permissions on configured paths"
   task :set_permissions do
     on release_roles :all do
-      if fetch(:use_set_permissions)
+      if fetch(:permission_method) != false
         invoke "deploy:set_permissions:#{fetch(:permission_method).to_s}"
       end
     end
