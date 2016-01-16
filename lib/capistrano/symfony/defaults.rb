@@ -32,7 +32,7 @@ set :assets_install_flags,  '--symlink'
 # Capistrano defaults
 #
 set :linked_files, []
-set :linked_dirs, -> { [fetch(:log_path), fetch(:web_path) + "/uploads"] }
+set :linked_dirs, -> { [fetch(:log_path)] }
 
 #
 # Configure capistrano/file-permissions defaults
