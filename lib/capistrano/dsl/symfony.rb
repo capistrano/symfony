@@ -26,6 +26,14 @@ module Capistrano
           release_path.join(fetch(:symfony_console_path))
       end
 
+      def symfony_vendor_path
+        release_path.join('vendor')
+      end
+
+      def build_bootstrap_path
+        symfony_vendor_path.join("sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php")
+      end
+
       def symfony_console(command, params = '')
         execute :php, symfony_console_path, command, params, fetch(:symfony_console_flags)
       end

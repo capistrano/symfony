@@ -89,7 +89,7 @@ namespace :symfony do
   task :build_bootstrap do
     on release_roles :all do
       within release_path do
-        execute :php, "./vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php", fetch(:app_path)
+        execute :php, build_bootstrap_path, fetch(:app_path)
       end
     end
   end
