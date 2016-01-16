@@ -39,7 +39,13 @@ module Capistrano
       end
 
       def build_bootstrap_path
-        symfony_vendor_path.join("sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php")
+        bootstrap_path = symfony_vendor_path.join("sensio/distribution-bundle")
+
+        if fetch(:sensio_distribution_version).to_i <= 4
+          bootstrap_path = bootstrap_path.join("Sensio/Bundle/DistributionBundle")
+        end
+
+        bootstrap_path.join("Resources/bin/build_bootstrap.php")
       end
 
       def symfony_console(command, params = '')
