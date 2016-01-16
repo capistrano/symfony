@@ -1,8 +1,6 @@
-require "capistrano/dsl/paths"
-
 module Capistrano
   module DSL
-    module Paths
+    module Symfony
 
       def symfony_app_path
           release_path.join(fetch(:app_path))
