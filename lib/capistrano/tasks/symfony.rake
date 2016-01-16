@@ -11,7 +11,7 @@ namespace :symfony do
 
     on release_roles(role) do
       within release_path do
-        execute :php, fetch(:symfony_console_path), command, params, fetch(:symfony_console_flags)
+        symfony_console(command, params)
       end
     end
 
@@ -21,26 +21,36 @@ namespace :symfony do
   namespace :cache do
     desc "Run app/console cache:clear for the #{fetch(:symfony_env)} environment"
     task :clear do
-      invoke "symfony:console", "cache:clear"
+      on release_roles(:all) do
+        symfony_console "cache:clear"
+      end
     end
 
     desc "Run app/console cache:warmup for the #{fetch(:symfony_env)} environment"
     task :warmup do
-      invoke "symfony:console", "cache:warmup"
+      on release_roles(:all) do
+        symfony_console "cache:warmup"
+      end
     end
   end
 
   namespace :assets do
     desc "Install assets"
     task :install do
-      invoke "symfony:console", "assets:install", fetch(:assets_install_path) + ' ' + fetch(:assets_install_flags)
+      on release_roles(:all) do
+        within release_path do
+          symfony_console "assets:install", fetch(:assets_install_path) + ' ' + fetch(:assets_install_flags)
+        end
+      end
     end
   end
 
   namespace :assetic do
     desc "Dump assets with Assetic"
     task :dump do
-      invoke "symfony:console", "assetic:dump", fetch(:assetic_dump_flags)
+      on release_roles(:all) do
+        symfony_console "assetic:dump", fetch(:assetic_dump_flags)
+      end
     end
   end
 

@@ -22,6 +22,14 @@ module Capistrano
           release_path.join(fetch(:app_config_path))
       end
 
+      def symfony_console_path
+          release_path.join(fetch(:symfony_console_path))
+      end
+
+      def symfony_console(command, params = '')
+        execute :php, symfony_console_path, command, params, fetch(:symfony_console_flags)
+      end
+
     end
   end
 end
