@@ -45,15 +45,6 @@ namespace :symfony do
     end
   end
 
-  namespace :assetic do
-    desc "Dump assets with Assetic"
-    task :dump do
-      on release_roles(:all) do
-        symfony_console "assetic:dump", fetch(:assetic_dump_flags)
-      end
-    end
-  end
-
   desc "Create the cache directory"
   task :create_cache_dir do
     on release_roles :all do

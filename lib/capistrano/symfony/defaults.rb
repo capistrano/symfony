@@ -27,7 +27,6 @@ set :controllers_to_clear, ["app_*.php"]
 # assets
 set :assets_install_path, fetch(:web_path)
 set :assets_install_flags,  '--symlink'
-set :assetic_dump_flags,  ''
 
 #
 # Capistrano defaults
