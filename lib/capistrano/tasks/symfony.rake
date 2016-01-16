@@ -18,14 +18,6 @@ namespace :symfony do
     Rake::Task[t.name].reenable
   end
 
-  task :command, :command_name, :flags do |t, args|
-    on roles(:all) do
-      warn "The task symfony:command is deprecated in favor of symfony:console"
-      invoke "symfony:console", args[:command_name], args[:flags]
-    end
-  end
-
-
   namespace :cache do
     desc "Run app/console cache:clear for the #{fetch(:symfony_env)} environment"
     task :clear do
