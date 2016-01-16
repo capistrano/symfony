@@ -1,53 +1,43 @@
-# Symfony environment
+#
+# Symfony defaults
+#
 set :symfony_env,  "prod"
 
-# Symfony application path
-set :app_path,              "app"
+set :symfony_directory_structure, 2
 
-# Symfony web path
-set :web_path,              "web"
+# symfony-standard edition top-level directories
+set :app_path, "app"
+set :web_path, "web"
+set :var_path, "var"
+set :bin_path, "bin"
 
-# Symfony log path
-set :log_path,              fetch(:app_path) + "/logs"
+# Use closures for directories nested under the top level dirs, so that
+# any changes to web/app etc do not require these to be changed also
+set :app_config_path, -> { fetch(:app_path) + "/config" }
+set :log_path, -> { fetch(:symfony_directory_structure) == 2 ? fetch(:app_path) + "/logs" : fetch(:var_path) + "/logs" }
+set :cache_path, -> { fetch(:symfony_directory_structure) == 2 ? fetch(:app_path) + "/cache" : fetch(:var_path) + "/cache" }
 
-# Symfony cache path
-set :cache_path,            fetch(:app_path) + "/cache"
-
-# Symfony config file path
-set :app_config_path,       fetch(:app_path) + "/config"
-
-# Controllers to clear
-set :controllers_to_clear, ["app_*.php"]
-
-# Files that need to remain the same between deploys
-set :linked_files,          []
-
-# Dirs that need to remain the same between deploys (shared dirs)
-set :linked_dirs,           [fetch(:log_path), fetch(:web_path) + "/uploads"]
-
-# Dirs that need to be writable by the HTTP Server (i.e. cache, log dirs)
-set :file_permissions_paths,         [fetch(:log_path), fetch(:cache_path)]
-
-# capistrano/file-permissions default
-set :file_permissions_paths, [fetch(:log_path), fetch(:cache_path)]
-
-# Method used to set permissions (:chmod, :acl, or :chown)
-set :permission_method,     false
-
-# Execute set permissions
-set :use_set_permissions,   false
-
-# Symfony console path
-set :symfony_console_path, fetch(:app_path) + "/console"
-
-# Symfony console flags
+# console
+set :symfony_console_path, -> { fetch(:symfony_directory_structure) == 2 ?  fetch(:app_path) + '/console' : fetch(:bin_path) + "/console" }
 set :symfony_console_flags, "--no-debug"
 
-# Assets install path
-set :assets_install_path,   fetch(:web_path)
+set :controllers_to_clear, ["app_*.php"]
 
-# Assets install flags
+# assets
+set :assets_install_path, fetch(:web_path)
 set :assets_install_flags,  '--symlink'
-
-# Assetic dump flags
 set :assetic_dump_flags,  ''
+
+#
+# Capistrano defaults
+#
+set :linked_files, []
+set :linked_dirs, -> { [fetch(:log_path), fetch(:web_path) + "/uploads"] }
+
+#
+# Configure capistrano/file-permissions defaults
+#
+set :file_permissions_paths, -> { fetch(:symfony_directory_structure) == 2 ? [fetch(:log_path), fetch(:cache_path)] : [fetch(:var_path)] }
+# Method used to set permissions (:chmod, :acl, or :chown)
+set :permission_method, false
+set :use_set_permissions, false

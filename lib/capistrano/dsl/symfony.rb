@@ -10,6 +10,14 @@ module Capistrano
           release_path.join(fetch(:web_path))
       end
 
+      def symfony_bin_path
+        release_path.join(fetch(:bin_path))
+      end
+
+      def symfony_var_path
+        release_path.join(fetch(:var_path))
+      end
+
       def symfony_log_path
           release_path.join(fetch(:log_path))
       end
