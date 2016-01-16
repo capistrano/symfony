@@ -3,8 +3,8 @@
 #
 set :symfony_env,  "prod"
 
-set :symfony_directory_structure, 2
-set :sensio_distribution_version, 4
+set :symfony_directory_structure, 3
+set :sensio_distribution_version, 5
 
 # symfony-standard edition top-level directories
 set :app_path, "app"
