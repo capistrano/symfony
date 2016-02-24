@@ -11,44 +11,37 @@ namespace :symfony do
 
     on release_roles(role) do
       within release_path do
-        execute :php, fetch(:symfony_console_path), command, params, fetch(:symfony_console_flags)
+        symfony_console(command, params)
       end
     end
 
     Rake::Task[t.name].reenable
   end
 
-  task :command, :command_name, :flags do |t, args|
-    on roles(:all) do
-      warn "The task symfony:command is deprecated in favor of symfony:console"
-      invoke "symfony:console", args[:command_name], args[:flags]
-    end
-  end
-
-
   namespace :cache do
     desc "Run app/console cache:clear for the #{fetch(:symfony_env)} environment"
     task :clear do
-      invoke "symfony:console", "cache:clear"
+      on release_roles(:all) do
+        symfony_console "cache:clear"
+      end
     end
 
     desc "Run app/console cache:warmup for the #{fetch(:symfony_env)} environment"
     task :warmup do
-      invoke "symfony:console", "cache:warmup"
+      on release_roles(:all) do
+        symfony_console "cache:warmup"
+      end
     end
   end
 
   namespace :assets do
     desc "Install assets"
     task :install do
-      invoke "symfony:console", "assets:install", fetch(:assets_install_path) + ' ' + fetch(:assets_install_flags)
-    end
-  end
-
-  namespace :assetic do
-    desc "Dump assets with Assetic"
-    task :dump do
-      invoke "symfony:console", "assetic:dump", fetch(:assetic_dump_flags)
+      on release_roles(:all) do
+        within release_path do
+          symfony_console "assets:install", fetch(:assets_install_path) + ' ' + fetch(:assets_install_flags)
+        end
+      end
     end
   end
 
@@ -67,7 +60,7 @@ namespace :symfony do
   desc "Set user/group permissions on configured paths"
   task :set_permissions do
     on release_roles :all do
-      if fetch(:use_set_permissions)
+      if fetch(:permission_method) != false
         invoke "deploy:set_permissions:#{fetch(:permission_method).to_s}"
       end
     end
@@ -87,7 +80,7 @@ namespace :symfony do
   task :build_bootstrap do
     on release_roles :all do
       within release_path do
-        execute :php, "./vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php", fetch(:app_path)
+        execute :php, build_bootstrap_path, fetch(:app_path)
       end
     end
   end
