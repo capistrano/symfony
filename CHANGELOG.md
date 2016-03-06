@@ -1,6 +1,12 @@
 # Capistrano Symfony 1.x Changelog
 
 
+## `1.0.0.rc2`
+
+https://github.com/capistrano/symfony/compare/1.0.0.rc2...1.0.0.rc1
+
+* Ensure bootstrap.php is saved in `var/` when using Symfony 3 directory structure
+
 ## `1.0.0.rc1`
 
 https://github.com/capistrano/symfony/compare/0.4.0...1.0.0.rc1
