@@ -22,7 +22,7 @@ set :cache_path, -> { fetch(:symfony_directory_structure) == 2 ? fetch(:app_path
 set :symfony_console_path, -> { fetch(:symfony_directory_structure) == 2 ?  fetch(:app_path) + '/console' : fetch(:bin_path) + "/console" }
 set :symfony_console_flags, "--no-debug"
 
-set :controllers_to_clear, ["app_*.php"]
+set :controllers_to_clear, ["app_*.php", "config.php"]
 
 # assets
 set :assets_install_path, fetch(:web_path)
