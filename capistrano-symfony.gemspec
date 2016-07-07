@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
 
   gem.post_install_message = <<eos
   WARNING - This gem has switched repositories. This gem is now for the
-  capitrano-symfony plugin located at https://github.com/capistrano/symfony.
+  capistrano-symfony plugin located at https://github.com/capistrano/symfony.
   This package behaves differently from the previous, and the release versions
   have changed.
 
