@@ -40,3 +40,5 @@ set :linked_dirs, -> { [fetch(:log_path)] }
 set :file_permissions_paths, -> { fetch(:symfony_directory_structure) == 2 ? [fetch(:log_path), fetch(:cache_path)] : [fetch(:var_path)] }
 # Method used to set permissions (:chmod, :acl, or :chown)
 set :permission_method, false
+
+set :symfony_deploy_roles, :all
