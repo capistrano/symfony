@@ -3,16 +3,7 @@ module Capistrano
   end
 end
 
-namespace :deploy do
-
-  task :updating do
-    invoke "symfony:create_cache_dir"
-    invoke "symfony:set_permissions"
-  end
-
-  task :updated do
-    invoke "symfony:cache:warmup"
-    invoke "symfony:clear_controllers"
-  end
-
-end
+before 'deploy:updating', 'symfony:create_cache_dir'
+before 'deploy:updating', 'symfony:set_permissions'
+before 'deploy:updated', 'symfony:cache:warmup'
+before 'deploy:updated', 'symfony:clear_controllers'
