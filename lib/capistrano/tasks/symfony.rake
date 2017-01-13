@@ -89,6 +89,31 @@ namespace :symfony do
     end
   end
 
+  desc 'Update parameters.yml'
+  task :update_parameters, :param do |t, args|
+    on release_roles :all do
+      currentParameters = YAML::load(capture("cat #{release_path}/app/config/parameters.yml"))
+      parameter = YAML::load("#{ENV['param']}")
+
+      if parameter
+        parameter.each do |k,v|
+          if currentParameters['parameters'].fetch(k, false) != false
+            puts "Parameter `k` has been updated to #{parameter[k]}".green
+            currentParameters['parameters'][k] = parameter[k]
+          else
+            puts "Parameter `k: #{parameter[k]}` has been added".green
+            currentParameters['parameters'][k] = parameter[k]
+          end
+        end
+
+        upload! StringIO.new(currentParameters.to_yaml), "#{shared_path}/app/config/parameters.yml"
+        invoke "symfony:console", "cache:clear"
+      else
+        puts "No parameter updated".yellow
+      end
+    end
+  end
+
 end
 
 task :symfony => ["symfony:console"]
