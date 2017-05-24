@@ -48,8 +48,13 @@ module Capistrano
         bootstrap_path.join("Resources/bin/build_bootstrap.php")
       end
 
+      def symfony_console_options
+        fetch(:symfony_console_flags) + " --env=" + fetch(:symfony_env)
+      end
+
+
       def symfony_console(command, params = '')
-        execute :php, symfony_console_path, command, params, fetch(:symfony_console_flags)
+        execute :php, symfony_console_path, command, params, symfony_console_options
       end
 
     end
