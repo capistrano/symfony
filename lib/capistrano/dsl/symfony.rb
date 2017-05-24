@@ -52,7 +52,6 @@ module Capistrano
         fetch(:symfony_console_flags) + " --env=" + fetch(:symfony_env)
       end
 
-
       def symfony_console(command, params = '')
         execute :php, symfony_console_path, command, params, symfony_console_options
       end
