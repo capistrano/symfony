@@ -70,6 +70,9 @@ set :linked_dirs, ["var/logs"]
 # Set correct permissions between releases, this is turned off by default
 set :file_permissions_paths, ["var"]
 set :permission_method, false
+
+# Role filtering
+set :symfony_roles, :all
 ```
 
 #### Using this plugin with the old Symfony 2 directory structure and SensioDistributionBundle <= 4
