@@ -25,13 +25,6 @@ namespace :symfony do
         symfony_console "cache:clear"
       end
     end
-
-    desc "Run app/console cache:warmup for the #{fetch(:symfony_env)} environment"
-    task :warmup do
-      on release_roles(:all) do
-        symfony_console "cache:warmup"
-      end
-    end
   end
 
   namespace :assets do

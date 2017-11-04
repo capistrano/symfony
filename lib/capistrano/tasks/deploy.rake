@@ -11,7 +11,6 @@ namespace :deploy do
   end
 
   task :updated do
-    invoke "symfony:cache:warmup"
     invoke "symfony:clear_controllers"
   end
 
