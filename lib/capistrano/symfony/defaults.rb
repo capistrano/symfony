@@ -31,7 +31,7 @@ set :assets_install_flags,  '--symlink'
 #
 # Capistrano defaults
 #
-set :linked_files, []
+set :linked_files, -> { [fetch(:app_config_path) + "/parameters.yml"] }
 set :linked_dirs, -> { [fetch(:log_path)] }
 
 #
