@@ -57,7 +57,7 @@ set :symfony_console_path, "bin/console"
 set :symfony_console_flags, "--no-debug"
 
 # Remove app_dev.php during deployment, other files in web/ can be specified here
-set :controllers_to_clear, ["app_*.php"]
+set :controllers_to_clear, ["app_*.php", "config.php"]
 
 # asset management
 set :assets_install_path, "web"
