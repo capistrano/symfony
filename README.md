@@ -12,7 +12,7 @@ It leverages the following capistrano tasks to deploy a Symfony app
 ```
 # Gemfile
 gem 'capistrano',  '~> 3.4'
-gem 'capistrano-symfony', '~> 1.0.0.rc1'
+gem 'capistrano-symfony', '~> 1.0.0.rc3'
 ```
 
 ## Usage
