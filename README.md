@@ -13,7 +13,7 @@ It leverages the following capistrano tasks to deploy a Symfony app
 
 This version is built for **Symfony 2 and 3**. 
 
-Go to [Version 1 documentation](../tree/version-info). 
+Go to [Version 1 documentation](/../../tree/1.x). 
 
 #### Version 2.x
 
