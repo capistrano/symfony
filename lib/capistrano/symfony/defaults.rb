@@ -3,12 +3,12 @@
 #
 set :symfony_env,  "prod"
 
-
 # symfony-standard edition top-level directories
-set :config_path, "config"
-set :web_path, "web"
-set :var_path, "var"
+set :project_dir, "."
 set :bin_path, "bin"
+set :config_path, "config"
+set :var_path, "var"
+set :web_path, "web"
 
 # Use closures for directories nested under the top level dirs, so that
 # any changes to web/app etc do not require these to be changed also
@@ -26,7 +26,7 @@ set :assets_install_flags,  '--symlink'
 #
 # Capistrano defaults
 #
-set :linked_files, -> { [fetch(:app_config_path) + "/parameters.yml"] }
+set :linked_files, -> { [fetch(:project_dir) + "/.env"] }
 set :linked_dirs, -> { [fetch(:log_path)] }
 
 #
