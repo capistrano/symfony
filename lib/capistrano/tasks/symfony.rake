@@ -63,16 +63,6 @@ namespace :symfony do
       invoke "deploy:set_permissions:#{fetch(:permission_method).to_s}"
     end
   end
-
-  desc "Clear non production controllers"
-  task :clear_controllers do
-    next unless any? :controllers_to_clear
-    on release_roles(fetch(:symfony_deploy_roles)) do
-      within symfony_web_path do
-        execute :rm, "-f", *fetch(:controllers_to_clear)
-      end
-    end
-  end
 end
 
 task :symfony => ["symfony:console"]

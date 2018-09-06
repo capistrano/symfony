@@ -19,8 +19,6 @@ set :cache_path, -> { fetch(:var_path) + "/cache" }
 set :symfony_console_path, -> { fetch(:bin_path) + "/console" }
 set :symfony_console_flags, "--no-debug"
 
-set :controllers_to_clear, ["app_*.php", "config.php"]
-
 # assets
 set :assets_install_path, fetch(:web_path)
 set :assets_install_flags,  '--symlink'
