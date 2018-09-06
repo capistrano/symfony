@@ -4,7 +4,6 @@
 set :symfony_env,  "prod"
 
 # symfony-standard edition top-level directories
-set :project_dir, "."
 set :bin_path, "bin"
 set :config_path, "config"
 set :var_path, "var"
@@ -26,7 +25,7 @@ set :assets_install_flags,  '--symlink'
 #
 # Capistrano defaults
 #
-set :linked_files, -> { [fetch(:project_dir) + "/.env"] }
+set :linked_files, -> { [".env"] }
 set :linked_dirs, -> { [fetch(:log_path)] }
 
 #

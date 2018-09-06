@@ -109,6 +109,7 @@ deploy
 |   |__ deploy:symlink:shared
 |   |__ symfony:create_cache_dir
 |   |__ symfony:set_permissions
+|   |__ symfony:make_console_executable
 |__ deploy:updated
 |   |__ symfony:cache:warmup
 |   |__ symfony:clear_controllers

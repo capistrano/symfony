@@ -63,6 +63,11 @@ namespace :symfony do
       invoke "deploy:set_permissions:#{fetch(:permission_method).to_s}"
     end
   end
+
+  desc "Make symfony_console_path executable"
+  task :make_console_executable do
+    execute :chmod, "755", fetch(:symfony_console_path)
+  end
 end
 
 task :symfony => ["symfony:console"]
