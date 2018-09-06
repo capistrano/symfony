@@ -73,20 +73,6 @@ namespace :symfony do
       end
     end
   end
-
-  desc "Build the bootstrap file"
-  task :build_bootstrap do
-    on release_roles(fetch(:symfony_deploy_roles)) do
-      within release_path do
-        if fetch(:symfony_directory_structure) == 2
-          execute :php, build_bootstrap_path, fetch(:app_path)
-        else
-          execute :php, build_bootstrap_path, fetch(:var_path)
-        end
-      end
-    end
-  end
-
 end
 
 task :symfony => ["symfony:console"]
