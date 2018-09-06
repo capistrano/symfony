@@ -1,6 +1,14 @@
 # Capistrano Symfony 1.x Changelog
 
 
+## `1.0.0`
+
+No changes since RC3
+
+## `1.0.0.rc3`
+
+(No changelog provided.) See diff: See the diff: https://github.com/capistrano/symfony/compare/1.0.0.rc2...1.0.0.rc3
+
 ## `1.0.0.rc2`
 
 https://github.com/capistrano/symfony/compare/1.0.0.rc2...1.0.0.rc1
