@@ -75,14 +75,14 @@ to see exactly how the defaults are set up.
 ```ruby
 
 # symfony-standard edition directories
-set :config_path, "config"
-set :web_path, "public"
-set :var_path, "var"
 set :bin_path, "bin"
+set :config_path, "config"
+set :var_path, "var"
+set :web_path, "public"
 
 # The next settings are lazily evaluated from the above values, so take care
 # when modifying them
-set :log_path, "var/logs"
+set :log_path, "var/log"
 set :cache_path, "var/cache"
 
 set :symfony_console_path, "bin/console"
@@ -93,8 +93,10 @@ set :assets_install_path, "public"
 set :assets_install_flags,  '--symlink'
 
 # Share files/directories between releases
-set :linked_files, []
 set :linked_dirs, ["var/logs"]
+set :linked_files, []
+# To use a .env file:
+#set :linked_files, [".env"]
 
 # Set correct permissions between releases, this is turned off by default
 set :file_permissions_paths, ["var"]
@@ -104,12 +106,11 @@ set :permission_method, false
 set :symfony_roles, :all
 set :symfony_deploy_roles, :all
 
-# Set environment variables: 
+# Add extra environment variables: 
 set :default_env, {
  'APP_ENV' => 'prod'
  'SECRET' => 'foobar'
 }
-
 ```
 
 ### Flow
@@ -167,8 +168,12 @@ set :file_permissions_users, ["nginx"]
 set :file_permissions_paths, ["var", "public/uploads"]
 ```
 
-Please note that `:acl` requires that `setfacl` be available on your deployment
-target
+**Note:** Using `:acl` requires that `setfacl` be available on your deployment target.
+**Note:** If you are getting an error like `setfacl: Option -m: Invalid argument near character 3`,  
+it means that the users in `file_permissions_users` do not exist on your deployment
+target.
+
+
 
 See [the symfony documentation](http://symfony.com/doc/current/book/installation.html#checking-symfony-application-configuration-and-setup)
 and [the file permission capistrano plugin](https://github.com/capistrano/file-permissions) for reference.
