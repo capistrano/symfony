@@ -103,6 +103,13 @@ set :permission_method, false
 # Role filtering
 set :symfony_roles, :all
 set :symfony_deploy_roles, :all
+
+# Set environment variables: 
+set :default_env, {
+ 'APP_ENV' => 'prod'
+ 'SECRET' => 'foobar'
+}
+
 ```
 
 ### Flow
