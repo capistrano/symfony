@@ -7,6 +7,20 @@ It leverages the following capistrano tasks to deploy a Symfony app
 * https://github.com/capistrano/composer
 * https://github.com/capistrano/file-permissions
 
+## Version information
+
+#### Version 1.x
+
+This version is built for **Symfony 2 and 3**. 
+
+Go to [Version 1 documentation](/../../tree/1.x). 
+
+#### Version 2.x
+
+This version is built for **Symfony 4**. 
+
+You are currently on the Version 2 branch. 
+
 ## Installation
 
 ```
