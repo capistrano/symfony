@@ -64,29 +64,10 @@ namespace :symfony do
     end
   end
 
-  desc "Clear non production controllers"
-  task :clear_controllers do
-    next unless any? :controllers_to_clear
-    on release_roles(fetch(:symfony_deploy_roles)) do
-      within symfony_web_path do
-        execute :rm, "-f", *fetch(:controllers_to_clear)
-      end
-    end
+  desc "Make symfony_console_path executable"
+  task :make_console_executable do
+    execute :chmod, "755", fetch(:symfony_console_path)
   end
-
-  desc "Build the bootstrap file"
-  task :build_bootstrap do
-    on release_roles(fetch(:symfony_deploy_roles)) do
-      within release_path do
-        if fetch(:symfony_directory_structure) == 2
-          execute :php, build_bootstrap_path, fetch(:app_path)
-        else
-          execute :php, build_bootstrap_path, fetch(:var_path)
-        end
-      end
-    end
-  end
-
 end
 
 task :symfony => ["symfony:console"]
