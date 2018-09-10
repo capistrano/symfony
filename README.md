@@ -1,6 +1,6 @@
 # Capistrano::Symfony
 
-Symfony 2 (standard edition) specific tasks for Capistrano v3 (inspired by [capifony][2]).
+Symfony 4 specific tasks for Capistrano v3 (inspired by [capifony][2]).
 
 It leverages the following capistrano tasks to deploy a Symfony app
 
@@ -11,8 +11,8 @@ It leverages the following capistrano tasks to deploy a Symfony app
 
 ```
 # Gemfile
-gem 'capistrano',  '~> 3.4'
-gem 'capistrano-symfony', '~> 1.0.0'
+gem 'capistrano',  '~> 3.10'
+gem 'capistrano-symfony', '~> 2.0.0-alfa1'
 ```
 
 ## Usage
@@ -27,40 +27,33 @@ require 'capistrano/symfony'
 
 ### Settings
 
-If you are using an un-modified symfony-standard edition, version 3 then you do not need to change/add anything to your `deploy.rb` other than what is required from Capistrano.
+If you are using a standard Symfony Flex application that follows the best practises 
+then you do not need to change/add anything to your `deploy.rb` other than what is 
+required from Capistrano.
 
-We do however expose the following settings (shown with default evaluated values) that can be modified to suit your project. Please refer to `lib/capistrano/symfony/defaults.rb` to see exactly how the defaults are set up.
+We do however expose the following settings (shown with default evaluated values) 
+that can be modified to suit your project. Please refer to `lib/capistrano/symfony/defaults.rb` 
+to see exactly how the defaults are set up.
 
 
 ```ruby
-# Symfony console commands will use this environment for execution
-set :symfony_env,  "prod"
-
-# Set this to 2 for the old directory structure
-set :symfony_directory_structure, 3
-# Set this to 4 if using the older SensioDistributionBundle
-set :sensio_distribution_version, 5
 
 # symfony-standard edition directories
-set :app_path, "app"
-set :web_path, "web"
+set :config_path, "config"
+set :web_path, "public"
 set :var_path, "var"
 set :bin_path, "bin"
 
-# The next 3 settings are lazily evaluated from the above values, so take care
+# The next settings are lazily evaluated from the above values, so take care
 # when modifying them
-set :app_config_path, "app/config"
 set :log_path, "var/logs"
 set :cache_path, "var/cache"
 
 set :symfony_console_path, "bin/console"
 set :symfony_console_flags, "--no-debug"
 
-# Remove app_dev.php during deployment, other files in web/ can be specified here
-set :controllers_to_clear, ["app_*.php", "config.php"]
-
 # asset management
-set :assets_install_path, "web"
+set :assets_install_path, "public"
 set :assets_install_flags,  '--symlink'
 
 # Share files/directories between releases
@@ -75,18 +68,6 @@ set :permission_method, false
 set :symfony_roles, :all
 set :symfony_deploy_roles, :all
 ```
-
-#### Using this plugin with the old Symfony 2 directory structure and SensioDistributionBundle <= 4
-
-Add the following to `deploy.rb` to use the old directory structure
-
-```
-# deploy.rb
-set :symfony_directory_structure, 2
-set :sensio_distribution_version, 4
-```
-
-If you are upgrading this gem and have modified `linked_dirs` or "advanced" variables such as `log_path` then you will need to update those accordingly
 
 ### Flow
 
@@ -126,9 +107,12 @@ deploy
 
 ### File permissions
 
-Set the `permission_method` variable to one of `:chmod`, `:acl`, or `:chgrp` in your `deploy.rb` to handle the common scenario of a web user and the deploy user being different.
+Set the `permission_method` variable to one of `:chmod`, `:acl`, or `:chgrp` in
+your `deploy.rb` to handle the common scenario of a web user and the deploy user
+being different.
 
-Both will need access to the files/directories such as `var/cache` and `web/uploads` (if you handle uploads). Set `file_permissions_users` to your webserver user
+Both will need access to the files/directories such as `var/cache` and `public/uploads`
+(if you handle uploads). Set `file_permissions_users` to your webserver user
 
 Example:
 
@@ -137,19 +121,20 @@ Example:
 
 set :permission_method, :acl
 set :file_permissions_users, ["nginx"]
-set :file_permissions_paths, ["var", "web/uploads"]
+set :file_permissions_paths, ["var", "public/uploads"]
 ```
 
-Please note that `:acl` requires that `setfacl` be available on your deployment target
+Please note that `:acl` requires that `setfacl` be available on your deployment
+target
 
-See [the symfony documentation](http://symfony.com/doc/current/book/installation.html#checking-symfony-application-configuration-and-setup) and [the file permission capistrano plugin](https://github.com/capistrano/file-permissions) for reference
+See [the symfony documentation](http://symfony.com/doc/current/book/installation.html#checking-symfony-application-configuration-and-setup)
+and [the file permission capistrano plugin](https://github.com/capistrano/file-permissions) for reference.
 
 ### Integrated common tasks
 
 The following common tasks are available:
 
 * `symfony:assets:install`
-* `symfony:build_bootstrap` - useful if you disable composer
 
 So you can use them with hooks in your project's `deploy.rb` like this:
 
@@ -174,7 +159,8 @@ namespace :deploy do
 end
 ```
 
-If you want to execute a command on a host with a given role you can use the Capistrano `on` DSL, additionally using `within` from Capistrano will change the directory
+If you want to execute a command on a host with a given role you can use the Capistrano
+`on` DSL, additionally using `within` from Capistrano will change the directory
 
 ```ruby
 namespace :deploy do
