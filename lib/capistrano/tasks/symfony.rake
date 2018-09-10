@@ -66,7 +66,11 @@ namespace :symfony do
 
   desc "Make symfony_console_path executable"
   task :make_console_executable do
-    execute :chmod, "755", fetch(:symfony_console_path)
+    on release_roles(fetch(:symfony_deploy_roles)) do
+        within release_path do
+          execute :chmod, "755", fetch(:symfony_console_path)
+        end
+      end
   end
 end
 

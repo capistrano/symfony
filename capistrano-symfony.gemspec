@@ -4,11 +4,11 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |gem|
   gem.name          = "capistrano-symfony"
-  gem.version       = '1.0.0'
+  gem.version       = '2.0.0-alfa1'
   gem.authors       = ["Peter Mitchell"]
   gem.email         = ["pete@peterjmit.com"]
   gem.description   = %q{Symfony specific Capistrano tasks}
-  gem.summary       = %q{Capistrano Symfony - Easy deployment of Symfony 2 & 3 apps with Ruby over SSH}
+  gem.summary       = %q{Capistrano Symfony - Easy deployment of Symfony 4 apps with Ruby over SSH}
   gem.homepage      = "http://github.com/capistrano/capistrano-symfony"
 
   gem.files         = `git ls-files`.split($/)

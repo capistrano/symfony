@@ -23,21 +23,43 @@ You are currently on the Version 2 branch.
 
 ## Installation
 
+Specify your dependencies: 
 ```
 # Gemfile
-gem 'capistrano',  '~> 3.10'
+source 'https://rubygems.org'
+gem 'capistrano',  '~> 3.11'
 gem 'capistrano-symfony', '~> 2.0.0-alfa1'
 ```
 
-## Usage
+Install your dependencies: 
+```
+bundle install
+```
 
-Require capistrano-symfony in your cap file
+When `capistrano` and `capistrano-symfony` is installed. Run the following command
+to set up your local files:
+
+```
+cap install
+```
+
+Make Capistrano aware of `'capistrano/symfony' by require capistrano-symfony in your
+new Capfile
 
 ```
 # Capfile
 require 'capistrano/symfony'
+
+# If you use composer you might want this:
+require 'capistrano/composer'
 ```
 
+## Usage
+
+```
+cap staging deploy
+cap production deploy
+```
 
 ### Settings
 
@@ -53,14 +75,14 @@ to see exactly how the defaults are set up.
 ```ruby
 
 # symfony-standard edition directories
-set :config_path, "config"
-set :web_path, "public"
-set :var_path, "var"
 set :bin_path, "bin"
+set :config_path, "config"
+set :var_path, "var"
+set :web_path, "public"
 
 # The next settings are lazily evaluated from the above values, so take care
 # when modifying them
-set :log_path, "var/logs"
+set :log_path, "var/log"
 set :cache_path, "var/cache"
 
 set :symfony_console_path, "bin/console"
@@ -71,8 +93,10 @@ set :assets_install_path, "public"
 set :assets_install_flags,  '--symlink'
 
 # Share files/directories between releases
-set :linked_files, []
 set :linked_dirs, ["var/logs"]
+set :linked_files, []
+# To use a .env file:
+#set :linked_files, [".env"]
 
 # Set correct permissions between releases, this is turned off by default
 set :file_permissions_paths, ["var"]
@@ -81,6 +105,12 @@ set :permission_method, false
 # Role filtering
 set :symfony_roles, :all
 set :symfony_deploy_roles, :all
+
+# Add extra environment variables: 
+set :default_env, {
+ 'APP_ENV' => 'prod'
+ 'SECRET' => 'foobar'
+}
 ```
 
 ### Flow
@@ -138,8 +168,12 @@ set :file_permissions_users, ["nginx"]
 set :file_permissions_paths, ["var", "public/uploads"]
 ```
 
-Please note that `:acl` requires that `setfacl` be available on your deployment
-target
+**Note:** Using `:acl` requires that `setfacl` be available on your deployment target.
+**Note:** If you are getting an error like `setfacl: Option -m: Invalid argument near character 3`,  
+it means that the users in `file_permissions_users` do not exist on your deployment
+target.
+
+
 
 See [the symfony documentation](http://symfony.com/doc/current/book/installation.html#checking-symfony-application-configuration-and-setup)
 and [the file permission capistrano plugin](https://github.com/capistrano/file-permissions) for reference.
@@ -184,6 +218,24 @@ namespace :deploy do
     end
   end
 end
+```
+
+### Using composer
+
+If you use composer, make sure your Capfile includes: 
+
+```
+require 'capistrano/composer'
+```
+
+To download the composer executable add the following to your `deploy.rb`:
+
+```
+# First define deploy target: 
+set :deploy_to, "/home/sites/com.example"
+
+# Install composer if it does not exist
+SSHKit.config.command_map[:composer] = "php #{shared_path.join("composer.phar")}"
 ```
 
 [1]: http://capistranorb.com/documentation/getting-started/flow/

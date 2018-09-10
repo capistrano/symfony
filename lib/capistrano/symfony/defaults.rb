@@ -7,7 +7,7 @@ set :symfony_env,  "prod"
 set :bin_path, "bin"
 set :config_path, "config"
 set :var_path, "var"
-set :web_path, "web"
+set :web_path, "public"
 
 # Use closures for directories nested under the top level dirs, so that
 # any changes to web/app etc do not require these to be changed also
@@ -37,3 +37,4 @@ set :permission_method, false
 
 # Role filtering
 set :symfony_roles, :all
+set :symfony_deploy_roles, :all
