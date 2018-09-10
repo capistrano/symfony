@@ -23,21 +23,43 @@ You are currently on the Version 2 branch.
 
 ## Installation
 
+Specify your dependencies: 
 ```
 # Gemfile
-gem 'capistrano',  '~> 3.10'
+source 'https://rubygems.org'
+gem 'capistrano',  '~> 3.11'
 gem 'capistrano-symfony', '~> 2.0.0-alfa1'
 ```
 
-## Usage
+Install your dependencies: 
+```
+bundle install
+```
 
-Require capistrano-symfony in your cap file
+When `capistrano` and `capistrano-symfony` is installed. Run the following command
+to set up your local files:
+
+```
+cap install
+```
+
+Make Capistrano aware of `'capistrano/symfony' by require capistrano-symfony in your
+new Capfile
 
 ```
 # Capfile
 require 'capistrano/symfony'
+
+# If you use composer you might want this:
+require 'capistrano/composer'
 ```
 
+## Usage
+
+```
+cap staging deploy
+cap production deploy
+```
 
 ### Settings
 
@@ -184,6 +206,24 @@ namespace :deploy do
     end
   end
 end
+```
+
+### Using composer
+
+If you use composer, make sure your Capfile includes: 
+
+```
+require 'capistrano/composer'
+```
+
+To download the composer executable add the following to your `deploy.rb`:
+
+```
+# First define deploy target: 
+set :deploy_to, "/home/sites/com.example"
+
+# Install composer if it does not exist
+SSHKit.config.command_map[:composer] = "php #{shared_path.join("composer.phar")}"
 ```
 
 [1]: http://capistranorb.com/documentation/getting-started/flow/
