@@ -73,6 +73,7 @@ set :permission_method, false
 
 # Role filtering
 set :symfony_roles, :all
+set :symfony_deploy_roles, :all
 ```
 
 #### Using this plugin with the old Symfony 2 directory structure and SensioDistributionBundle <= 4
