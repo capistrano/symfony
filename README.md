@@ -120,7 +120,6 @@ capistrano-symfony hooks into the [flow][1] offered by capistrano. It adds to th
 * `symfony:create_cache_dir`
 * `symfony:set_permissions`
 * `symfony:cache:warmup`
-* `symfony:clear_controllers`
 
 ```
 deploy
@@ -138,7 +137,6 @@ deploy
 |   |__ symfony:make_console_executable
 |__ deploy:updated
 |   |__ symfony:cache:warmup
-|   |__ symfony:clear_controllers
 |__ deploy:publishing
 |   |__ deploy:symlink:release
 |   |__ deploy:restart
