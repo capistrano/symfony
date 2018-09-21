@@ -140,7 +140,6 @@ deploy
 |   |__ symfony:make_console_executable
 |__ deploy:updated
 |   |__ symfony:cache:warmup
-|   |__ symfony:clear_controllers
 |__ deploy:publishing
 |   |__ deploy:symlink:release
 |   |__ deploy:restart
