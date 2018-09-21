@@ -120,6 +120,8 @@ capistrano-symfony hooks into the [flow][1] offered by capistrano. It adds to th
 * `symfony:create_cache_dir`
 * `symfony:set_permissions`
 * `symfony:cache:warmup`
+
+in versions **1.X** 
 * `symfony:clear_controllers`
 
 ```
