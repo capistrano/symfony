@@ -108,7 +108,7 @@ set :symfony_deploy_roles, :all
 
 # Add extra environment variables: 
 set :default_env, {
- 'APP_ENV' => 'prod'
+ 'APP_ENV' => 'prod',
  'SECRET' => 'foobar'
 }
 ```

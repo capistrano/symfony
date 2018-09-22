@@ -1,6 +1,10 @@
 # Capistrano Symfony 1.x Changelog
 
 
+## `2.0.0-alfa3`
+
+Removed linked files.
+
 ## `2.0.0-alfa2`
 
 Removed `symfony:clear_controllers`.

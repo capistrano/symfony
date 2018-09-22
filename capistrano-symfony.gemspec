@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |gem|
   gem.name          = "capistrano-symfony"
-  gem.version       = '2.0.0-alfa2'
+  gem.version       = '2.0.0-alfa3'
   gem.authors       = ["Peter Mitchell"]
   gem.email         = ["pete@peterjmit.com"]
   gem.description   = %q{Symfony specific Capistrano tasks}
