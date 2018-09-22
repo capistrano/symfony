@@ -1,6 +1,10 @@
 # Capistrano Symfony 1.x Changelog
 
 
+## `2.0.0-alfa2`
+
+Removed `symfony:clear_controllers`.
+
 ## `2.0.0-alfa1`
 
 Support for only Symfony4.
