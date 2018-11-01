@@ -25,7 +25,7 @@ set :assets_install_flags,  '--symlink'
 #
 # Capistrano defaults
 #
-set :linked_files, -> { [".env"] }
+set :linked_files, -> { [""] }
 set :linked_dirs, -> { [fetch(:log_path)] }
 
 #
