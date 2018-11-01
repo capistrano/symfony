@@ -44,10 +44,11 @@ cap install
 ```
 
 Make Capistrano aware of `'capistrano/symfony' by require capistrano-symfony in your
-new Capfile
+new Capfile after `require "capistrano/deploy"`.
 
 ```
 # Capfile
+# ...
 require 'capistrano/symfony'
 
 # If you use composer you might want this:
