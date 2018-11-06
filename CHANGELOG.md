@@ -1,5 +1,10 @@
 # Capistrano Symfony 1.x Changelog
 
+## `2.0.0`
+
+We are not linking `.env` by default. To upgrade from `2.0.0-alfa2` please add the following: 
+
+`set :linked_files, [".env"]`
 
 ## `2.0.0-alfa2`
 
