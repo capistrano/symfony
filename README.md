@@ -220,13 +220,22 @@ end
 
 ### Using composer
 
-If you use composer, make sure your Capfile includes: 
+If you use composer you can install `capistrano/composer`. Here are some short 
+instructions. Read more at [capistrano/composer](https://github.com/capistrano/composer).
+
+First run the following command to download the library: 
+
+```
+gem install capistrano-composer
+```
+
+Then make sure your Capfile includes the following: 
 
 ```
 require 'capistrano/composer'
 ```
 
-To download the composer executable add the following to your `deploy.rb`:
+To download the composer.phar executable add the following to your `deploy.rb`:
 
 ```
 # First define deploy target: 
@@ -234,6 +243,10 @@ set :deploy_to, "/home/sites/com.example"
 
 # Install composer if it does not exist
 SSHKit.config.command_map[:composer] = "php #{shared_path.join("composer.phar")}"
+
+namespace :deploy do
+  after :starting, 'composer:install_executable'
+end
 ```
 
 [1]: http://capistranorb.com/documentation/getting-started/flow/
