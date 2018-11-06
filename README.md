@@ -93,7 +93,7 @@ set :assets_install_path, "public"
 set :assets_install_flags,  '--symlink'
 
 # Share files/directories between releases
-set :linked_dirs, ["var/logs"]
+set :linked_dirs, ["var/log"]
 set :linked_files, []
 # To use a .env file:
 #set :linked_files, [".env"]
