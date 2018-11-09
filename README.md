@@ -43,16 +43,18 @@ to set up your local files:
 cap install
 ```
 
-Make Capistrano aware of `'capistrano/symfony' by require capistrano-symfony in your
+Make Capistrano aware of `'capistrano/symfony'` by requiring capistrano-symfony in your
 new Capfile after `require "capistrano/deploy"`.
 
-```
+```ruby
 # Capfile
 # ...
-require 'capistrano/symfony'
+require "capistrano/symfony"
+```
 
-# If you use composer you might want this:
-require 'capistrano/composer'
+If you use composer you might want this:
+```
+require "capistrano/composer"
 ```
 
 ## Usage
