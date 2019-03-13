@@ -14,6 +14,9 @@ set :web_path, "public"
 set :log_path, -> { fetch(:var_path) + "/log" }
 set :cache_path, -> { fetch(:var_path) + "/cache" }
 
+# PHP executable used to run commands
+set :php, "php"
+
 # console
 set :symfony_console_path, -> { fetch(:bin_path) + "/console" }
 set :symfony_console_flags, "--no-debug"
