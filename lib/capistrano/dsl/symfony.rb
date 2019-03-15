@@ -39,7 +39,9 @@ module Capistrano
       end
 
       def symfony_console(command, params = '')
-        execute :php, symfony_console_path, command, params, fetch(:symfony_console_flags)
+        on release_roles(fetch(:symfony_deploy_roles)) do
+          execute :php, symfony_console_path, command, params, fetch(:symfony_console_flags)
+        end
       end
 
     end
