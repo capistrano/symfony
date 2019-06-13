@@ -11,7 +11,7 @@ set :web_path, "public"
 
 # Use closures for directories nested under the top level dirs, so that
 # any changes to web/app etc do not require these to be changed also
-set :log_path, -> { fetch(:var_path) + "/log" }
+set :log_path, -> { fetch(:var_path) + "/logs" }
 set :cache_path, -> { fetch(:var_path) + "/cache" }
 
 # PHP executable used to run commands

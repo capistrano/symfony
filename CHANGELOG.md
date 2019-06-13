@@ -6,6 +6,8 @@ We are not linking `.env` by default. To upgrade from `2.0.0-alfa2` please add t
 
 `set :linked_files, [".env"]`
 
+Change `:log_path` variable value to match default Symfony's configuration.
+
 ## `2.0.0-alfa2`
 
 Removed `symfony:clear_controllers`.
