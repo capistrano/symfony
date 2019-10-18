@@ -43,3 +43,4 @@ set :permission_method, false
 
 # Role filtering
 set :symfony_roles, :all
+set :symfony_deploy_roles, :all
