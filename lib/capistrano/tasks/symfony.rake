@@ -9,10 +9,8 @@ namespace :symfony do
     role = args[:role] || fetch(:symfony_roles)
     params = args[:params] || ''
 
-    on release_roles(role) do
-      within release_path do
-        symfony_console(command, params)
-      end
+    within release_path do
+      symfony_console(command, params)
     end
 
     Rake::Task[t.name].reenable
@@ -21,26 +19,20 @@ namespace :symfony do
   namespace :cache do
     desc "Run app/console cache:clear for the #{fetch(:symfony_env)} environment"
     task :clear do
-      on release_roles(fetch(:symfony_deploy_roles)) do
-        symfony_console "cache:clear"
-      end
+      symfony_console "cache:clear"
     end
 
     desc "Run app/console cache:warmup for the #{fetch(:symfony_env)} environment"
     task :warmup do
-      on release_roles(fetch(:symfony_deploy_roles)) do
-        symfony_console "cache:warmup"
-      end
+      symfony_console "cache:warmup"
     end
   end
 
   namespace :assets do
     desc "Install assets"
     task :install do
-      on release_roles(fetch(:symfony_deploy_roles)) do
-        within release_path do
-          symfony_console "assets:install", fetch(:assets_install_path) + ' ' + fetch(:assets_install_flags)
-        end
+      within release_path do
+        symfony_console "assets:install", fetch(:assets_install_path) + ' ' + fetch(:assets_install_flags)
       end
     end
   end
